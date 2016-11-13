@@ -4,7 +4,7 @@
 angular.module('LunchCheck', [])
 
 .controller('LunchCheckController', function ($scope) {
-  $scope.lunchItems = "Yakov";
+  $scope.lunchItems = "";
 
   $scope.outputMesssage = "";
 
