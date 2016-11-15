@@ -3,24 +3,33 @@
 
 angular.module('LunchCheck', [])
 
-.controller('LunchCheckController', function ($scope) {
+.controller('LunchCheckController', LunchCheckController);
+
+LunchCheckController.$inject = ['$scope'];
+
+function LunchCheckController($scope) {
   $scope.lunchItems = "";
 
   $scope.outputMesssage = "";
 
   $scope.displayList = function() {
       if($scope.lunchItems) {
-          if($scope.lunchItems.split(",").length > 3) {
+        var counter = $scope.lunchItems.split(",").filter(ignoreEmptyItes).length;
+        if(counter > 0) {
+          if(counter > 3) {
             $scope.outputMesssage =  "Too much!";
           }
           else {
             $scope.outputMesssage =  "Enjoy!";
           }
+          return;
+        }
       }
-      else {
-        $scope.outputMesssage =  "Please enter data first";
-      }
+      $scope.outputMesssage =  "Please enter data first";
   }
-});
+  var ignoreEmptyItes = function(item) {
+    return item.trim().length > 0;
+  }
+};
 
 })();
